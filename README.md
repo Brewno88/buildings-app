@@ -2,10 +2,6 @@
 
 🖥 [Live-demo](https://sleepy-hamilton-93662d.netlify.app/)
 
-<img src="src/assets/WebScore.png"
-     alt="PWA Score"
-     style="width: 300px;" />
-
 ### 🗒 DESCRIPTION
 
 A listing app that show available buildings.\
