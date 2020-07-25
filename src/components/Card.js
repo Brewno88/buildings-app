@@ -19,8 +19,6 @@ const Card = ({ building }) => {
 		dispatchSelected({ type: 'SELECTED', payload: building });
 	};
 
-	console.log('Card re-rendered');
-
 	return (
 		<MyCard
 			sideBar={sideBar}
