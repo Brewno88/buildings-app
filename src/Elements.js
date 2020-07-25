@@ -73,6 +73,8 @@ export const MyFilters = styled.div`
 
 	@media (min-width: 320px) {
 		margin-left: 0;
+		margin-right: 1rem;
+		width: 35%;
 	}
 	@media (min-width: 768px) {
 		margin-left: 2rem;

@@ -2,7 +2,7 @@ import React from 'react';
 import { MyHeader } from '../Elements';
 import Filters from '../components/Filters';
 
-export default function Header() {
+const Header = () => {
 	return (
 		<MyHeader
 			initial={{ y: -100 }}
@@ -14,7 +14,9 @@ export default function Header() {
 					<h1>Our Offering</h1>
 					<Filters />
 				</div>
+				<img src={require('../assets/logo512.png')} alt='' />
 			</div>
 		</MyHeader>
 	);
-}
+};
+export default Header;

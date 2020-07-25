@@ -7,9 +7,10 @@ import {
 } from '../Elements';
 import { BuildContext } from '../context/GlobalContext';
 import { MyTable } from '../Elements';
-export default function SideBar() {
-	const context = useContext(BuildContext);
-	// Destructuring selectedBuilding
+
+const SideBar = React.memo(() => {
+	const { selected, setSideBar, formatNumber } = useContext(BuildContext);
+
 	const {
 		description,
 		floors,
@@ -19,7 +20,7 @@ export default function SideBar() {
 		name,
 		status,
 		type,
-	} = { ...context.selected };
+	} = { ...selected };
 
 	// Assignment #1: Recursive function
 	const availableSpaces = floors.map(num => num.availableSpace);
@@ -39,9 +40,8 @@ export default function SideBar() {
 	// Without Recursion
 	// const totalAvailable = floors  ? floors.map(e => e.availableSpace).reduce((acc = 0, cur) => acc + cur) : 0;
 
-	// function for SideBar close button
 	const closeSide = () => {
-		context.setSideBar(false);
+		setSideBar(false);
 	};
 
 	return (
@@ -50,6 +50,7 @@ export default function SideBar() {
 			animate={{ x: 0, opacity: 1 }}
 			transition={{ duration: 0.5 }}
 		>
+			{/* Close Button and Image */}
 			<div style={{ position: 'relative' }}>
 				<MyCloseButton onClick={() => closeSide()} whileHover={{ scale: 1.2 }}>
 					X
@@ -60,7 +61,9 @@ export default function SideBar() {
 					style={{ width: '100%' }}
 				/>
 			</div>
+			{/* Title */}
 			<h1>{name.toUpperCase()}</h1>
+			{/* Building Details */}
 			<MySideDetails>
 				<MySideDetailsRow>
 					<span>Type:</span>
@@ -79,15 +82,17 @@ export default function SideBar() {
 
 				<MySideDetailsRow>
 					<span>Gross area:</span>
-					<span>{context.formatNumber(grossArea)} sq ft</span>
+					<span>{formatNumber(grossArea)} sq ft</span>
 				</MySideDetailsRow>
 
 				<MySideDetailsRow>
 					<span>Current total available space:</span>
-					<span>{context.formatNumber(totalAvailable)} sq ft</span>
+					<span>{formatNumber(totalAvailable)} sq ft</span>
 				</MySideDetailsRow>
 			</MySideDetails>
+			{/* Description */}
 			<p style={{ fontWeight: '700', padding: '1rem 0' }}>{description}</p>
+			{/* Floors Details */}
 			<MyTable>
 				<tbody>
 					<tr>
@@ -102,7 +107,7 @@ export default function SideBar() {
 							<td>
 								{e.availableSpace === 0
 									? '-'
-									: `${context.formatNumber(e.availableSpace)} sq ft`}
+									: `${formatNumber(e.availableSpace)} sq ft`}
 							</td>
 							<td>{e.occupier}</td>
 						</tr>
@@ -111,4 +116,5 @@ export default function SideBar() {
 			</MyTable>
 		</MySideBar>
 	);
-}
+});
+export default SideBar;

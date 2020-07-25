@@ -8,31 +8,36 @@ import {
 } from '../Elements';
 import { BuildContext } from '../context/GlobalContext';
 
-export default function Card({ building }) {
+const Card = ({ building }) => {
 	const { grossArea, imageSrc, name, status, type } = building;
+	const { sideBar, setSideBar, dispatchSelected, formatNumber } = useContext(
+		BuildContext
+	);
 
-	const context = useContext(BuildContext);
-	// View Details button onClick function
 	const selectCard = () => {
-		context.setSideBar(true);
-		context.dispatchSelected({ type: 'SELECTED', payload: building });
+		setSideBar(true);
+		dispatchSelected({ type: 'SELECTED', payload: building });
 	};
+
+	console.log('Card re-rendered');
 
 	return (
 		<MyCard
-			sideBar={context.sideBar}
+			sideBar={sideBar}
 			whileHover={{
 				boxShadow: '1px 1px 15px var(--black)',
 				borderRadius: '15px',
 				scale: 1.01,
 			}}
 		>
+			{/* Card Thumbnail */}
 			<img src={require(`../assets/${imageSrc}`)} alt={name} />
 			<MyCardDetails>
+				{/* Title */}
 				<h2>{name.toUpperCase()}</h2>
 				<MyCardDetailsList>
 					{/* Remove Card's details when scroll horizontally */}
-					{context.sideBar && window.innerWidth < 1024 ? (
+					{sideBar && window.innerWidth < 1024 ? (
 						<></>
 					) : (
 						<>
@@ -46,11 +51,12 @@ export default function Card({ building }) {
 							</MyCardDetailsRow>
 							<MyCardDetailsRow>
 								<span>Grass area:</span>
-								<span>{context.formatNumber(grossArea)} sq ft</span>
+								<span>{formatNumber(grossArea)} sq ft</span>
 							</MyCardDetailsRow>
 						</>
 					)}
 				</MyCardDetailsList>
+				{/* View Details button */}
 				<MyCardButton
 					onClick={() => selectCard()}
 					whileHover={{ scale: 1.05, borderRadius: '5px' }}
@@ -60,4 +66,5 @@ export default function Card({ building }) {
 			</MyCardDetails>
 		</MyCard>
 	);
-}
+};
+export default Card;
