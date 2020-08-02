@@ -1,5 +1,6 @@
 import React, { createContext, useState, useReducer, useEffect } from 'react';
-import buildingsJSON from '../buildings.json';
+import axios from 'axios';
+// import buildingsJSON from '../buildings.json';
 import { selectedReducer, filterReducer } from './reducers';
 
 export const BuildContext = createContext();
@@ -16,9 +17,20 @@ export const BuildProvider = ({ children }) => {
 	const formatNumber = num =>
 		num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
 
+	const getBuildings = async () => {
+		try {
+			const buildings = await axios
+				.get('http://localhost:3000/api/buildings')
+				.then(res => res.data);
+			setBuildings({ fetching: false, data: [...buildings] });
+		} catch (error) {
+			console.log(error.message);
+		}
+	};
+
 	useEffect(() => {
 		setTimeout(() => {
-			setBuildings({ fetching: false, data: [...buildingsJSON] });
+			getBuildings();
 		}, 2000);
 	}, []);
 

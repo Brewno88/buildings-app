@@ -21,7 +21,6 @@ const SideBar = React.memo(() => {
 		status,
 		type,
 	} = { ...selected };
-
 	// Assignment #1: Recursive function
 	const availableSpaces = floors.map(num => num.availableSpace);
 

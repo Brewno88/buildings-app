@@ -17,11 +17,11 @@ const CardsGrid = () => {
 				sideBar={sideBar}
 			>
 				{filtered.length
-					? filtered.map(building => (
-							<Card building={building} key={building.id} />
-					  ))
+					? filtered.map(building => {
+							return <Card building={building} key={building._id} />;
+					  })
 					: buildings.map(building => (
-							<Card building={building} key={building.id} />
+							<Card building={building} key={building._id} />
 					  ))}
 			</MyCardGrid>
 			{sideBar && <SideBar />}

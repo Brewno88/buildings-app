@@ -1,5 +1,3 @@
-import buildings from '../buildings.json';
-
 const TYPE = 'TYPE';
 const STATUS = 'STATUS';
 const RESET = 'RESET';
@@ -9,10 +7,7 @@ const SELECTED = 'SELECTED';
 export const selectedReducer = (state, action) => {
 	switch (action.type) {
 		case SELECTED:
-			const selected = buildings.filter(
-				build => build.id === action.payload.id
-			);
-			return selected[0];
+			return action.payload;
 		default:
 			return state;
 	}
@@ -22,13 +17,17 @@ export const selectedReducer = (state, action) => {
 export const filterReducer = (state, action) => {
 	switch (action.type) {
 		case TYPE:
-			const type = buildings.filter(build => build.type === action.payload);
+			const type = action.payload.buildings.filter(
+				build => build.type === action.payload.type
+			);
 			return type;
 		case STATUS:
-			const status = buildings.filter(build => build.status === action.payload);
+			const status = action.payload.buildings.filter(
+				build => build.status === action.payload.status
+			);
 			return status;
 		case RESET:
-			return buildings;
+			return action.payload;
 		default:
 			return state;
 	}
