@@ -8,6 +8,7 @@ const cors = require('cors');
 app.use(cors());
 app.use(express.json());
 
+// Connect to DB
 mongoose.connect(process.env.DB_URI, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
@@ -18,6 +19,7 @@ connection.once('open', () => {
 	console.log('Connected to MongoDB');
 });
 
+// Routes
 const buildingsRouter = require('./routes/buildings');
 app.use('/api/buildings', buildingsRouter);
 
