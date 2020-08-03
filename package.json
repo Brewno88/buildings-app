@@ -18,14 +18,14 @@
     "styled-components": "^5.0.1"
   },
   "scripts": {
-    "client-install": "npm install --prefix client",
+    "backend-install": "npm install --prefix client",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "npm run start --prefix backend",
+    "server": "npm run server --prefix backend",
     "client": "npm run start",
-    "develop": "concurrently \"npm run server\" \"npm run client\" "
+    "develop": "concurrently \"npm run client\" \"npm run server\" "
   },
   "proxy": "http://localhost:5000",
   "eslintConfig": {
