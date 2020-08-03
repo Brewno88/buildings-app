@@ -1,6 +1,7 @@
 import React from 'react';
 import { MyHeader } from '../Elements';
 import Filters from '../components/Filters';
+import { Link, Route } from 'react-router-dom';
 
 const Header = () => {
 	return (
@@ -11,8 +12,11 @@ const Header = () => {
 		>
 			<div className='whole'>
 				<div className='left'>
-					<h1>Our Offering</h1>
-					<Filters />
+					<Link to='/'>
+						<h1>Our Offering</h1>
+					</Link>
+					<Link to='/MainPage'>Edit Buildings</Link>
+					<Route path='/' exact component={Filters} />
 				</div>
 				<img src={require('../assets/logo512.png')} alt='' />
 			</div>

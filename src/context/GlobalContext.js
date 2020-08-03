@@ -7,11 +7,8 @@ export const BuildContext = createContext();
 
 export const BuildProvider = ({ children }) => {
 	const [sideBar, setSideBar] = useState(false);
-
 	const [buildings, setBuildings] = useState({ fetching: true, data: [] });
-
 	const [filtered, dispatchFilters] = useReducer(filterReducer, []);
-
 	const [selected, dispatchSelected] = useReducer(selectedReducer, []);
 
 	const formatNumber = num =>
@@ -19,9 +16,7 @@ export const BuildProvider = ({ children }) => {
 
 	const getBuildings = async () => {
 		try {
-			const buildings = await axios
-				.get('http://localhost:3000/api/buildings')
-				.then(res => res.data);
+			const buildings = await axios.get('/api/buildings').then(res => res.data);
 			setBuildings({ fetching: false, data: [...buildings] });
 		} catch (error) {
 			console.log(error.message);
@@ -29,9 +24,7 @@ export const BuildProvider = ({ children }) => {
 	};
 
 	useEffect(() => {
-		setTimeout(() => {
-			getBuildings();
-		}, 2000);
+		getBuildings();
 	}, []);
 
 	const contextValues = {
