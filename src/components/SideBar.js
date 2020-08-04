@@ -4,9 +4,9 @@ import {
 	MySideDetailsRow,
 	MySideDetails,
 	MyCloseButton,
-} from '../Elements';
+} from '../Elements.style';
 import { BuildContext } from '../context/GlobalContext';
-import { MyTable } from '../Elements';
+import { MyTable } from '../Elements.style';
 
 const SideBar = React.memo(() => {
 	const { selected, setSideBar, formatNumber } = useContext(BuildContext);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { MyHeader } from './ComponentsStyles';
+import { MyHeader } from '../Elements.style';
 import { Link, Route } from 'react-router-dom';
 import Filters from '../components/Filters';
 import CreateButton from '../api/components/CreateButton';
@@ -11,7 +11,7 @@ const Header = () => {
 			animate={{ y: 0 }}
 			transition={{ duration: 1 }}
 		>
-			<nav className='whole'>
+			<nav className='container'>
 				<div className='left'>
 					<Link to='/'>
 						<h1>Our Offering</h1>

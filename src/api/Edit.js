@@ -1,19 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { BuildContext } from '../context/GlobalContext';
-import { MyContainer } from '../components/ComponentsStyles';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
+import { MyForm } from './APIStyle';
 
 function Buildings() {
-	// name: '',
-	// type: '',
-	// description: '',
-	// status: '',
-	// grossArea: 0,
-	// location: '',
-	// imageSrc: '',
-	// floors: [],
 	const { buildings } = useContext(BuildContext);
 	const [details, setDetails] = useState(buildings);
 
@@ -21,10 +13,9 @@ function Buildings() {
 		setDetails(buildings);
 	}, [buildings]);
 
-	console.log(details);
 	return details.length ? (
-		<MyContainer>
-			<Form>
+		<>
+			<MyForm className='container'>
 				<Form.Group controlId='formId'>
 					<Form.Label>Building id</Form.Label>
 					<Form.Control placeholder={details[0]._id} disabled />
@@ -71,8 +62,8 @@ function Buildings() {
 				<Button variant='primary' type='submit'>
 					Submit
 				</Button>
-			</Form>
-		</MyContainer>
+			</MyForm>
+		</>
 	) : (
 		<div
 			style={{
