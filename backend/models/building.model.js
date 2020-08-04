@@ -17,6 +17,7 @@ const buildingSchema = new Schema({
 	grossArea: { type: Number, required: true },
 	location: { type: String, required: true },
 	imageSrc: { type: String, required: true },
+	addedOn: { type: Date, default: Date.now },
 	floors: [floorsSchema],
 });
 
