@@ -1,10 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { BuildContext } from '../context/GlobalContext';
 import { MyTable } from './APIStyle';
+import MyConfirmDelete from './components/ConfirmDelete';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import Button from 'react-bootstrap/Button';
 
 function Buildings() {
-	const { buildings } = useContext(BuildContext);
+	const { buildings, dispatchSelected } = useContext(BuildContext);
+
+	const [onDelete, setOnDelete] = useState(false);
+	const [id, setId] = useState('');
+	// console.log(context);
 
 	return (
 		<>
@@ -25,13 +32,29 @@ function Buildings() {
 							<td>{build.status}</td>
 							<td>{build.location}</td>
 							<td>
-								<Link to={`/buildings/edit/${build._id}`}>Edit</Link>|
-								<Link to={`/delete/${build._id}`}>Delete</Link>
+								<Link
+									to={`/buildings/edit/${build._id}`}
+									onClick={() =>
+										dispatchSelected({ type: 'SELECTED', payload: build })
+									}
+								>
+									Edit
+								</Link>
+								|
+								<Button
+									onClick={() => {
+										setId(build._id);
+										setOnDelete(true);
+									}}
+								>
+									Delete
+								</Button>
 							</td>
 						</tr>
 					))}
 				</tbody>
 			</MyTable>
+			{onDelete && <MyConfirmDelete id={id} setOnDelete={setOnDelete} />}
 		</>
 	);
 }
