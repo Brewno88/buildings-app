@@ -1,6 +1,26 @@
 const router = require('express').Router();
 let Building = require('../models/building.model');
 
+const buildingStructure = req => {
+	return {
+		name: req.body.name,
+		type: req.body.type,
+		description: req.body.description,
+		status: req.body.status,
+		grossArea: req.body.grossArea,
+		location: req.body.location,
+		imageSrc: req.body.imageSrc,
+		floors: req.body.floors.map(floor => {
+			return {
+				label: floor.label,
+				availableSpace: floor.availableSpace,
+				occupier: floor.occupier,
+				disabled: floor.disabled,
+			};
+		}),
+	};
+};
+
 // GET ALL THE BUILDINGS
 router.get('/', async (req, res) => {
 	try {
@@ -26,23 +46,7 @@ router.put('/edit/:id', async (req, res) => {
 	try {
 		const updatedBuildings = await Building.findByIdAndUpdate(
 			{ _id: req.params.id },
-			{
-				name: req.body.name,
-				type: req.body.type,
-				description: req.body.description,
-				status: req.body.status,
-				grossArea: req.body.grossArea,
-				location: req.body.location,
-				imageSrc: req.body.imageSrc,
-				floors: req.body.floors.map(floor => {
-					return {
-						label: floor.label,
-						availableSpace: floor.availableSpace,
-						occupier: floor.occupier,
-						disabled: floor.disabled,
-					};
-				}),
-			}
+			buildingStructure(req)
 		);
 		res.status(200).json(updatedBuildings);
 	} catch (error) {
@@ -52,23 +56,7 @@ router.put('/edit/:id', async (req, res) => {
 
 // ADD A BUILDINGS
 router.post('/add', async (req, res) => {
-	const building = new Building({
-		name: req.body.name,
-		type: req.body.type,
-		description: req.body.description,
-		status: req.body.status,
-		grossArea: req.body.grossArea,
-		location: req.body.location,
-		imageSrc: req.body.imageSrc,
-		floors: req.body.floors.map(floor => {
-			return {
-				label: floor.label,
-				availableSpace: floor.availableSpace,
-				occupier: floor.occupier,
-				disabled: floor.disabled,
-			};
-		}),
-	});
+	const building = new Building(buildingStructure(req));
 	try {
 		const newBuilding = await building.save();
 
@@ -84,7 +72,7 @@ router.delete('/:id', async (req, res) => {
 		const removedBuilding = await Building.remove({ _id: req.params.id });
 		res.status(200).json(removedBuilding);
 	} catch (error) {
-		res.status(404).json({ message: error.messafe });
+		res.status(404).json({ message: error.message });
 	}
 });
 
