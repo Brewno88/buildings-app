@@ -9,7 +9,7 @@ export const BuildProvider = ({ children }) => {
 	const [sideBar, setSideBar] = useState(false);
 	const [buildings, setBuildings] = useState({ fetching: true, data: [] });
 	const [filtered, dispatchFilters] = useReducer(filterReducer, []);
-	const [selected, dispatchSelected] = useReducer(selectedReducer, []);
+	const [selected, dispatchSelected] = useReducer(selectedReducer, {});
 
 	const formatNumber = num =>
 		num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');

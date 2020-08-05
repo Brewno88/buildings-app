@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { MyCardGrid, MyContainer } from '../Elements.style';
+import { MyCardGrid } from '../Elements.style';
 import Card from './Card';
 import SideBar from './SideBar';
 import { BuildContext } from '../context/GlobalContext';

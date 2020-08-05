@@ -1,5 +1,4 @@
-import React, { useContext, useState } from 'react';
-import { BuildContext } from '../context/GlobalContext';
+import React, { useState } from 'react';
 import { MyForm } from './APIStyle';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -15,7 +14,7 @@ function Buildings() {
 		occupier: '',
 		disabled: false,
 	});
-	const [details, setDetails] = useState({
+	const initialState = {
 		name: '',
 		type: '',
 		description: '',
@@ -24,7 +23,8 @@ function Buildings() {
 		location: '',
 		imageSrc: '',
 		floors: [],
-	});
+	};
+	const [details, setDetails] = useState(initialState);
 
 	const onInputChange = (value, property) => {
 		setDetails({ ...details, [property]: value });
@@ -33,17 +33,8 @@ function Buildings() {
 	const onFormSubmit = e => {
 		e.preventDefault();
 		console.log(details);
-		axios.post('http://localhost:3000/api/buildings/add', details);
-		setDetails({
-			name: '',
-			type: '',
-			description: '',
-			status: '',
-			grossArea: 0,
-			location: '',
-			imageSrc: '',
-			floors: [],
-		});
+		axios.post('/api/buildings/add', details);
+		setDetails(initialState);
 	};
 
 	return (
