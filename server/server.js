@@ -13,6 +13,7 @@ app.use(express.json());
 mongoose.connect(process.env.DB_URI, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
+	useFindAndModify: false,
 });
 
 const connection = mongoose.connection;
