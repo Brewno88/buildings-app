@@ -3,7 +3,6 @@ import { BuildContext } from '../context/GlobalContext';
 import { MyTable } from './APIStyle';
 import MyConfirmDelete from './components/ConfirmDelete';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 
 function Buildings() {
@@ -11,7 +10,6 @@ function Buildings() {
 
 	const [onDelete, setOnDelete] = useState(false);
 	const [id, setId] = useState('');
-	// console.log(context);
 
 	return (
 		<>

@@ -33,7 +33,7 @@ function Buildings() {
 	const onFormSubmit = e => {
 		e.preventDefault();
 		console.log(details);
-		axios.post('/api/buildings/add', details);
+		axios.post('/api/buildings', details);
 		setDetails(initialState);
 	};
 

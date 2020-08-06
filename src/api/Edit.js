@@ -37,7 +37,7 @@ function Buildings() {
 	const onFormSubmit = async e => {
 		e.preventDefault();
 		console.log(update);
-		axios.put(`/api/buildings/edit/${id}`, update);
+		axios.patch(`/api/buildings/edit/${id}`, update);
 	};
 
 	useEffect(() => {
