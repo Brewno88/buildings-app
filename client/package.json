@@ -8,7 +8,6 @@
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
-    "concurrently": "^5.2.0",
     "framer": "^1.2.5",
     "framer-motion": "^1.8.4",
     "react": "^16.12.0",
